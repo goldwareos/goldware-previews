@@ -51,4 +51,29 @@
     }, { passive: true });
     media.style.transform = 'scale(1.04)';
   }
+
+  // SimpleChime chat (Dr. Smith's existing bot, same client_id as the live site). Loaded only after the page is
+  // ready: on the first scroll, tap or key press, or 3.5 s after load, so it never competes with the first paint.
+  var CHAT = 'https://widget.simplechime.com/static/js/nscript.js?client_id=TAfE07Z7eVOrMdG2SURS';
+  var chatStarted = false;
+  function loadChat() {
+    if (chatStarted || document.getElementById('c_widget') || /[?&](static|nochat)\b/.test(location.search)) return;
+    chatStarted = true;
+    var jq = document.createElement('script');
+    jq.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js';
+    jq.onload = function () {
+      // nscript.js waits for window 'load', which has already fired: run those listeners now, then restore.
+      var add = window.addEventListener;
+      window.addEventListener = function (type, fn, opts) {
+        if (type === 'load') { setTimeout(function () { typeof fn === 'function' ? fn.call(window, new Event('load')) : fn.handleEvent(new Event('load')); }); return; }
+        return add.call(this, type, fn, opts);
+      };
+      var w = document.createElement('script'); w.id = 'c_widget'; w.src = CHAT;
+      w.onload = w.onerror = function () { window.addEventListener = add; document.documentElement.classList.add('chat-ready'); };
+      document.body.appendChild(w);
+    };
+    document.body.appendChild(jq);
+  }
+  ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, loadChat, { once: true, passive: true }); });
+  window.addEventListener('load', function () { setTimeout(loadChat, 3500); });
 })();
