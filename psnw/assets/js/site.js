@@ -6,7 +6,7 @@
   if (/[?&]static\b/.test(location.search)) { root.classList.add('static'); reduce = true; [].forEach.call(document.querySelectorAll('img[loading="lazy"], iframe[loading="lazy"]'), function (i) { i.loading = 'eager'; if (i.tagName === 'IFRAME') { var s = i.src; i.src = s; } }); }
 
   var header = document.querySelector('.site-header');
-  function onScroll() { if (header) { header.classList.toggle('scrolled', window.scrollY > 8); header.classList.toggle('condensed', window.scrollY > 80); } }
+  function onScroll() { if (header) { header.classList.toggle('scrolled', window.scrollY > 8); header.classList.toggle('condensed', window.scrollY > 80); root.classList.toggle('hdr-condensed', window.scrollY > 52); } }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   var toggle = document.querySelector('.menu-toggle');
@@ -25,6 +25,16 @@
     btn.addEventListener('click', function () {
       var i = document.createElement('iframe'); i.src = f.getAttribute('data-src'); i.title = f.getAttribute('data-title');
       i.referrerPolicy = 'no-referrer-when-downgrade'; f.appendChild(i); btn.remove();
+    });
+  });
+
+  // Mockup form: say clearly that nothing is sent (at launch this posts to his HighLevel form)
+  [].forEach.call(document.querySelectorAll('form[data-mock]'), function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var s = f.querySelector('.form-status');
+      if (!f.checkValidity()) { var bad = f.querySelector(':invalid'); s.textContent = 'Please fill in ' + (bad && bad.labels && bad.labels[0] ? bad.labels[0].textContent.replace('*', '').trim().toLowerCase() : 'the required fields') + '.'; if (bad) bad.focus(); return; }
+      s.textContent = 'Preview only: this form does not send yet. Please call 208-400-5131.';
     });
   });
 
