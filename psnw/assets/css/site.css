@@ -448,3 +448,4 @@ textarea { min-height: 130px; resize: vertical; }
 }
 
 @media (max-width: 640px) { .static .mock-label, .mock-label { top: 118px; } }
+@media (min-width: 641px) { .mock-label { right: auto; left: 14px; } .static .mock-label { left: 50%; right: auto; transform: translateX(-50%); } }
