@@ -85,7 +85,12 @@
         return add.call(this, type, fn, opts);
       };
       var w = document.createElement('script'); w.id = 'c_widget'; w.src = CHAT;
-      w.onload = w.onerror = function () { window.addEventListener = add; document.documentElement.classList.add('chat-ready'); };
+      w.onload = w.onerror = function () {
+        window.addEventListener = add; document.documentElement.classList.add('chat-ready');
+        // SimpleChime renders decorative images without alt text: mark them decorative as they appear
+        var fix = function () { [].forEach.call(document.querySelectorAll('[class*="_sc"] img:not([alt])'), function (i) { i.alt = ''; }); };
+        fix(); if ('MutationObserver' in window) new MutationObserver(fix).observe(document.body, { childList: true, subtree: true });
+      };
       document.body.appendChild(w);
     };
     document.body.appendChild(jq);

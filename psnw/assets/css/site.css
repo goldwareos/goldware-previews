@@ -577,3 +577,12 @@ p.badge b { display: block; font-family: var(--serif); font-weight: 500; font-si
 :root, [class*="_sc"] { --widget-bg: #0f4d71 !important; }
 body .profile_div_sc .chaticon_sc, body .widget_sc .chat_header_sc { background: var(--navy) !important; }
 .chaticon_sc { box-shadow: 0 10px 24px -10px rgba(7, 42, 64, .6); }
+/* SimpleChime quick-reply chips: dark text on mid blue failed contrast (axe, open chat); use the site's outline style */
+body .widget_sc .menuChips { background: #fff !important; color: var(--navy) !important; border: 1.5px solid var(--navy) !important; opacity: 1 !important; font-weight: 700; }
+body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #fff !important; }
+/* Tablet: keep the About portrait beside the intro; tighten the stacked statement */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .page-hero.has-aside .wrap { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 36px; align-items: start; }
+  .ph-portrait { justify-self: end; max-width: 300px; }
+  .statement { gap: 8px; }
+}
