@@ -6,7 +6,7 @@
   if (/[?&]static\b/.test(location.search)) { root.classList.add('static'); reduce = true; [].forEach.call(document.querySelectorAll('img[loading="lazy"], iframe[loading="lazy"]'), function (i) { i.loading = 'eager'; if (i.tagName === 'IFRAME') { var s = i.src; i.src = s; } }); }
 
   var header = document.querySelector('.site-header');
-  function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 8); }
+  function onScroll() { if (header) { header.classList.toggle('scrolled', window.scrollY > 8); header.classList.toggle('condensed', window.scrollY > 80); } }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   var toggle = document.querySelector('.menu-toggle');
@@ -20,12 +20,28 @@
     });
   }
 
-  [].forEach.call(document.querySelectorAll('.map-facade'), function (f) {
-    f.querySelector('.mf-btn').addEventListener('click', function () {
+  [].forEach.call(document.querySelectorAll('.map-static'), function (f) {
+    var btn = f.querySelector('.mf-btn');
+    btn.addEventListener('click', function () {
       var i = document.createElement('iframe'); i.src = f.getAttribute('data-src'); i.title = f.getAttribute('data-title');
-      i.loading = 'lazy'; i.referrerPolicy = 'no-referrer-when-downgrade'; f.appendChild(i);
+      i.referrerPolicy = 'no-referrer-when-downgrade'; f.appendChild(i); btn.remove();
     });
   });
+
+  // Office preselect (?office=spokane) on the request form
+  var sel = document.getElementById('of'), m = location.search.match(/[?&]office=([a-z]+)/);
+  if (sel && m && sel.querySelector('option[value="' + m[1] + '"]')) sel.value = m[1];
+
+  // Open a question when linked to directly (faq.html#brca)
+  function openHash() { var t = location.hash && document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') t.open = true; }
+  openHash(); window.addEventListener('hashchange', openHash);
+
+  // Phone: the sticky Call/Request bar waits until the hero's own buttons are out of view
+  var heroBtns = document.querySelector('.hero-actions');
+  if (heroBtns && heroBtns.getBoundingClientRect().top < innerHeight && 'IntersectionObserver' in window && !root.classList.contains('static')) {
+    root.classList.add('bar-wait');
+    new IntersectionObserver(function (en) { root.classList.toggle('bar-wait', en[0].isIntersecting || en[0].boundingClientRect.top > 0); }).observe(heroBtns);
+  }
 
   var els = [].slice.call(document.querySelectorAll('.reveal'));
   if (reduce || !('IntersectionObserver' in window)) {
@@ -45,7 +61,7 @@
       if (ticking) return; ticking = true;
       requestAnimationFrame(function () {
         var y = Math.min(window.scrollY, 900);
-        media.style.transform = 'translate3d(0,' + (y * 0.18).toFixed(1) + 'px,0) scale(1.04)';
+        media.style.transform = 'translate3d(0,' + (y * 0.045).toFixed(1) + 'px,0) scale(1.04)';  // at most ~40px over the hero
         ticking = false;
       });
     }, { passive: true });
