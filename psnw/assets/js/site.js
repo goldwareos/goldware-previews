@@ -18,6 +18,9 @@
       panel.classList.toggle('open', !open);
       toggle.querySelector('.label').textContent = open ? 'Menu' : 'Close';
     });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { toggle.click(); toggle.focus(); }
+    });
   }
 
   [].forEach.call(document.querySelectorAll('.map-static'), function (f) {

@@ -605,7 +605,7 @@ body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #f
   .brand { display: block; }
   .site-header > .wrap { padding-top: 8px; }
   .brand > img { width: 106px; height: 44px; margin: 0; object-fit: contain; object-position: left center; }
-  .lockup { position: relative; display: flex; align-items: center; height: 60px; padding: 0 64px 0 0; border: 0; }
+  .lockup { position: relative; display: flex; flex-direction: row; align-items: center; height: 60px; padding: 0 64px 0 0; border: 0; }
   .lockup b { font-size: 17px; white-space: nowrap; transition: transform .35s var(--ease); }
   .lockup span { display: none; }
   .mini-mark { display: block; position: absolute; left: 0; top: 16px; width: 28px; height: 28px; opacity: 0; transition: opacity .35s var(--ease); }
@@ -623,3 +623,21 @@ body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #f
   /* N4: keep the last footer line clear of the chat launcher */
   .site-footer { padding-bottom: 96px; }
 }
+
+/* ---- Review 3 (Ezekiel) ---- */
+/* B1: the generic phone .brand img sizing must never reach the mini mark */
+.brand .mini-mark { width: 28px !important; height: 28px !important; flex: 0 0 auto; object-fit: contain; }
+@media (min-width: 641px) { .brand .mini-mark { display: none !important; } }
+/* Referring providers */
+.referral { background: #fff; border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px); padding: clamp(28px, 4vw, 48px); box-shadow: var(--shadow); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); }
+.section.mist .referral { background: #fff; }
+.referral h2 { font-size: clamp(28px, 2.6vw, 36px); }
+.referral .ref-head p { color: var(--muted); }
+.ref-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 32px; }
+.ref-grid h3 { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sky-text); margin: 0 0 6px; }
+.ref-grid p { color: var(--ink); margin-bottom: 18px; }
+.ref-big { font-family: var(--serif); font-size: 26px; color: var(--navy); line-height: 1.2; }
+.ref-big a { text-decoration: none; }
+.ref-list { margin: 0 0 18px; padding-left: 20px; }
+.ref-list li { padding: 2px 0; }
+@media (max-width: 1024px) { .referral, .ref-grid { grid-template-columns: 1fr; } }
