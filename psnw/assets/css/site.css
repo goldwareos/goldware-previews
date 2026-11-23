@@ -641,3 +641,19 @@ body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #f
 .ref-list { margin: 0 0 18px; padding-left: 20px; }
 .ref-list li { padding: 2px 0; }
 @media (max-width: 1024px) { .referral, .ref-grid { grid-template-columns: 1fr; } }
+
+/* ---- Review 3 minors ---- */
+.mock-label { display: none !important; }
+.mock-strip { background: #fff4cc; color: #5a4300; border-bottom: 1px solid #e3c96b; font: 700 13px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; text-align: center; padding: 8px 12px; }
+.submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 18px; }
+.preview-note { margin: 0; font-size: 15px; font-weight: 700; color: #5a4300; background: #fff4cc; border: 1px dashed #c9a227; border-radius: 10px; padding: 8px 12px; }
+.preview-note a { color: #5a4300; }
+.menu-toggle .i-close { display: none; }
+.menu-toggle[aria-expanded="true"] .i-open { display: none; }
+.menu-toggle[aria-expanded="true"] .i-close { display: block; }
+.chat-loading { position: absolute; inset: 70px 12px 12px; z-index: 5; display: grid; place-items: center; align-content: center; gap: 10px; text-align: center; background: #fff; border-radius: 12px; color: var(--ink); font: 400 16px/1.45 var(--sans); padding: 20px; }
+.chat-loading b { color: var(--navy); font-size: 17px; }
+.chat-loading .spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--sky-soft); border-top-color: var(--navy); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* Phone: the chat launcher waits (like the Call/Request bar) until the hero's own buttons have scrolled away */
+@media (max-width: 640px) { .bar-wait .profile_div_sc { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; } .profile_div_sc { transition: opacity .3s; } }

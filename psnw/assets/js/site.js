@@ -103,6 +103,20 @@
         // SimpleChime renders decorative images without alt text: mark them decorative as they appear
         var fix = function () { [].forEach.call(document.querySelectorAll('[class*="_sc"] img:not([alt])'), function (i) { i.alt = ''; }); };
         fix(); if ('MutationObserver' in window) new MutationObserver(fix).observe(document.body, { childList: true, subtree: true });
+        // Loading state: SimpleChime opens an empty window for several seconds before the greeting arrives
+        document.addEventListener('click', function (e) {
+          if (!e.target.closest || !e.target.closest('.chaticon_sc')) return;
+          setTimeout(function () {
+            var w = document.querySelector('.widget_sc');
+            if (!w || w.querySelector('.chat-loading') || w.querySelector('.menuChips, .botAvatar_sc')) return;
+            var d = document.createElement('div'); d.className = 'chat-loading'; d.setAttribute('role', 'status');
+            d.innerHTML = '<span class="spin" aria-hidden="true"></span><b>Starting chat…</b><span>Or call <a href="tel:+12084005131">208-400-5131</a>, Mon to Fri, 8 to 5.</span>';
+            w.appendChild(d);
+            var done = function () { if (w.querySelector('.menuChips, .botAvatar_sc')) { d.remove(); ob.disconnect(); } };
+            var ob = new MutationObserver(done); ob.observe(w, { childList: true, subtree: true });
+            setTimeout(function () { if (d.isConnected) d.querySelector('b').textContent = 'Chat is taking a while.'; }, 12000);
+          }, 50);
+        }, true);
       };
       document.body.appendChild(w);
     };
