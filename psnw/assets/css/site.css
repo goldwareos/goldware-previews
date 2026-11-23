@@ -657,3 +657,139 @@ body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #f
 @keyframes spin { to { transform: rotate(360deg); } }
 /* Phone: the chat launcher waits (like the Call/Request bar) until the hero's own buttons have scrolled away */
 @media (max-width: 640px) { .bar-wait .profile_div_sc { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; } .profile_div_sc { transition: opacity .3s; } }
+
+/* ==== ADDED 7: colour + contrast pass (his palette only: navy, sky, rose, mist; deeper tints) ==== */
+:root { --line: #cddbe5; --sky-deep: #3f6d86; --rose-band: #f3e6e2; }
+.eyebrow { color: var(--rose-text); }
+.lede { color: #3d4d59; }
+.hero-sub em { color: #e9cfc8; }
+.statement .big strong { color: var(--rose-text); }
+.checklist .dot { background: var(--sky); }
+/* Trust strip: navy band */
+.cred-strip { background: var(--navy); border-bottom: 0; }
+.cred-strip li { color: #d6e4ec; }
+.cred-strip li b { color: #fff; }
+/* Bands */
+.band-navy { background: var(--navy-deep); color: #e1ebf1; }
+.band-sky { background: var(--sky-deep); color: #eef4f7; }
+.band-navy h2, .band-navy h3, .band-sky h2, .band-sky h3 { color: #fff; }
+.band-navy .eyebrow, .band-sky .eyebrow { color: #f0d9d3; }
+.band-navy .lede, .band-navy p, .band-sky .lede, .band-sky > .wrap > div > p { color: #e1ebf1; }
+.band-navy a:not(.btn), .band-sky > .wrap > div a:not(.btn) { color: #fff; }
+.band-rose { background: var(--rose-band); }
+.band-rose .eyebrow { color: #7a5149; }
+.band-rose .pedigree li { border-top-color: #e2cec8; }
+.band-rose .portrait { background: linear-gradient(180deg, #fff 0%, #fbf5f3 100%); }
+/* Home "Is testing right for you?": navy band, list items as light cards */
+.band-navy .who-card { background: transparent; box-shadow: none; padding: 0; }
+.band-navy .who-card .aside p { color: #e1ebf1; }
+.band-navy .who-card .note { border-top-color: rgba(255,255,255,.22); color: #d6e4ec; }
+.band-navy .checklist { gap: 12px; }
+.band-navy .checklist li { background: #fff; color: var(--ink); border: 0; border-radius: 12px; padding: 14px 18px; }
+/* Steps: navy numerals, sky line, line icons */
+.steps li { border-color: var(--line); border-top: 3px solid var(--sky); }
+.steps li::before { color: var(--navy); }
+.step-ic { position: absolute; right: 26px; top: 30px; width: 44px; height: 44px; border-radius: 50%; background: var(--sky-soft); color: var(--sky-deep); display: grid; place-items: center; }
+.step-ic svg { width: 22px; height: 22px; }
+/* Referral block on a navy band: card stays white */
+.band-navy .referral { border: 0; }
+.band-navy .referral p, .band-navy .referral .lede { color: var(--ink); }
+.band-navy .referral .ref-head p { color: var(--muted); }
+.band-navy .referral h2, .band-navy .referral h3.x { color: var(--navy); }
+.band-navy .referral .ref-grid h3 { color: var(--sky-text); }
+.band-navy .referral .eyebrow { color: var(--rose-text); }
+.band-navy .referral a:not(.btn) { color: var(--navy); }
+/* Request band (sky) */
+.band-sky .form-card { border: 0; }
+.band-sky .form-card p, .band-sky .form-card label { color: var(--ink); }
+.band-sky .form-card .form-note { color: var(--muted); }
+.band-sky .preview-note, .band-sky .preview-note a { color: #5a4300; }
+.band-sky .form-card a { color: var(--navy); }
+/* Inner heroes: a touch more colour */
+.page-hero { background: linear-gradient(135deg, var(--sky-soft) 0%, var(--mist) 55%, var(--rose-soft) 100%); border-bottom: 3px solid var(--sky); }
+/* Hero byline (N1): stronger doctor relationship */
+.hero-cred img { width: 72px; height: 72px; }
+.hero-cred span b { display: block; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; }
+.hero-cred span { line-height: 1.35; }
+.honors li, .gene, .services li { border-color: var(--line); }
+.band-rose .honors li { border-color: #e2cec8; }
+@media (max-width: 640px) {
+  .hero-cred img { width: 56px; height: 56px; }
+  .hero-cred span b { font-size: 19px; }
+  .step-ic { top: 26px; right: 22px; width: 40px; height: 40px; }
+}
+
+/* ==== ADDED 7b: confident navy subpage banners, white headline, a real visual on the right ==== */
+.page-hero { background:
+   radial-gradient(60% 90% at 100% 0%, rgba(91, 137, 162, .45) 0%, rgba(91, 137, 162, 0) 60%),
+   radial-gradient(50% 70% at 85% 110%, rgba(166, 124, 116, .35) 0%, rgba(166, 124, 116, 0) 60%),
+   linear-gradient(120deg, var(--navy-ink) 0%, var(--navy-deep) 55%, var(--navy) 100%);
+  color: #fff; border-bottom: 0; }
+.page-hero .wrap, .page-hero.has-aside .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(36px, 5vw, 80px); align-items: center; }
+.page-hero h1 { color: #fff; }
+.page-hero .lede { color: #e1ebf1; }
+.page-hero .lede a { color: #fff; }
+.page-hero .eyebrow { color: #f0d9d3; }
+.crumbs { color: #cfe0ea; }
+.crumbs a { color: #fff; }
+.page-hero .reviewed { color: #d6e4ec; }
+.page-hero .hero-actions .btn-primary { background: #fff; color: var(--navy); box-shadow: none; }
+.page-hero .hero-actions .btn-primary:hover { background: var(--sky-soft); }
+.page-hero .hero-actions .btn-outline { border-color: rgba(255,255,255,.6); color: #fff; }
+.page-hero .hero-actions .btn-outline:hover { background: rgba(255,255,255,.12); }
+.page-hero .ph-steps { border: 0; }
+.page-hero .ph-offices a, .page-hero .ph-topics a { border-color: transparent; }
+.ph-visual { margin: 0; justify-self: end; width: 100%; max-width: 440px; }
+.page-hero .ph-portrait .badge, .page-hero p.badge { color: #d6e4ec; }
+.page-hero p.badge b { color: #fff; }
+/* Clinic: pedigree card */
+.ped-card { background: #fff; border-radius: 20px; padding: 22px 22px 18px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.55); color: var(--ink); }
+.ped-card svg { display: block; width: 100%; height: auto; }
+.ped-card figcaption { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 15px; color: var(--muted); margin-top: 8px; }
+.ped-card .lg { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.lg-a { background: var(--navy); } .lg-c { background: #fff; border: 2px solid var(--navy); box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 6px var(--rose); } .lg-p { background: var(--rose); }
+.ped-card .ph-cap { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink); }
+/* Locations: three map cards */
+.map-trio { position: relative; height: 340px; }
+.map-trio .mt { position: absolute; width: 68%; border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 24px 48px -24px rgba(0,0,0,.6); border: 4px solid #fff; }
+.map-trio .mt img { display: block; width: 100%; height: 150px; object-fit: cover; }
+.map-trio .mt b { display: block; padding: 8px 12px; font-family: var(--serif); font-weight: 500; font-size: 18px; color: var(--navy); }
+.map-trio .mt0 { left: 0; top: 0; transform: rotate(-3deg); } .map-trio .mt1 { right: 0; top: 70px; transform: rotate(2.5deg); z-index: 2; } .map-trio .mt2 { left: 10%; top: 150px; transform: rotate(-1deg); z-index: 3; }
+/* FAQ: most-asked card */
+.ask-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.55); }
+.ask-h { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--rose-text); }
+.ask-h img { width: 44px; height: 44px; border-radius: 50%; }
+.ask-card ul { list-style: none; margin: 0; padding: 0; }
+.ask-card li { border-top: 1px solid var(--line); }
+.ask-card a { display: block; padding: 12px 0; font-family: var(--serif); font-size: 19px; color: var(--navy); text-decoration: none; }
+.ask-card a:hover { text-decoration: underline; }
+/* Request / legal: call card */
+.call-card { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.55); text-align: center; color: var(--ink); }
+.call-card img { width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 12px; }
+.call-card p { margin: 0 0 16px; color: var(--muted); }
+.call-card p b { display: block; font-family: var(--serif); font-weight: 500; font-size: 24px; color: var(--navy); }
+.call-card .small { margin: 14px 0 0; font-size: 15px; }
+/* contrast fixes from the colour pass */
+.band-rose .pedigree li span:first-child { color: #6e4740; }
+.band-navy .referral li { color: var(--ink); }
+.band-rose .timeline .yr { color: #6e4740; }
+@media (max-width: 1024px) {
+  .page-hero .wrap, .page-hero.has-aside .wrap { grid-template-columns: 1fr; }
+  .ph-visual { justify-self: start; }
+  .map-trio { height: 320px; max-width: 520px; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .page-hero.has-aside .wrap { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .page-hero.has-aside .wrap .ph-visual { justify-self: end; }
+}
+@media (max-width: 640px) {
+  .ask-card, .call-card { display: none; }
+  .map-trio { height: 270px; } .map-trio .mt img { height: 110px; } .map-trio .mt2 { top: 120px; } .map-trio .mt1 { top: 56px; }
+}
+
+/* map trio: clean grid, labels always visible */
+.map-trio { height: auto !important; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.map-trio .mt { position: static !important; width: auto !important; transform: none !important; border-width: 0; }
+.map-trio .mt0 { grid-column: 1 / -1; }
+.map-trio .mt img { height: 130px !important; }
+.map-trio .mt0 img { height: 170px !important; }
