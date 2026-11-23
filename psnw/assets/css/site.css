@@ -573,5 +573,7 @@ p.badge b { display: block; font-family: var(--serif); font-weight: 500; font-si
   .bar-wait .action-bar { transform: translateY(110%); visibility: hidden; transition: transform .35s var(--ease), visibility 0s .35s; }
 }
 .card-h { font-size: 22px; }
-.chaticon_sc, .chat_header_sc { background-color: var(--navy) !important; }
+/* SimpleChime paints with background: var(--widget-bg) !important from a later stylesheet; win on specificity and set the variable */
+:root, [class*="_sc"] { --widget-bg: #0f4d71 !important; }
+body .profile_div_sc .chaticon_sc, body .widget_sc .chat_header_sc { background: var(--navy) !important; }
 .chaticon_sc { box-shadow: 0 10px 24px -10px rgba(7, 42, 64, .6); }
