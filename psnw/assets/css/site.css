@@ -827,3 +827,11 @@ main { view-transition-name: main; }
 .legal-doc ul.dash li::before { content: "\2013"; position: absolute; left: 0; color: var(--sky-text); }
 
 .page-hero .reviewed a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Office schedule (Dr. Smith's words, Nov 23 2026) */
+.dock-days { display: block; margin-top: 2px; font-size: 13px; color: var(--sky-text); font-weight: 700; }
+.sched { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--sky-text); border-radius: var(--radius); padding: clamp(22px, 3vw, 32px) clamp(24px, 3.5vw, 40px); box-shadow: var(--shadow); }
+.sched h2 { font-size: clamp(22px, 2vw, 28px); margin: 0 0 10px; }
+.sched ul { margin: 0 0 10px; padding-left: 1.2em; font-size: 18px; line-height: 1.6; color: var(--ink); }
+.sched p { margin: 0; color: var(--muted); font-size: 16px; }
+.office .facts b.days { display: block; color: var(--ink); font-weight: 700; margin-bottom: 2px; }
