@@ -836,3 +836,6 @@ main { view-transition-name: main; }
 .sched p { margin: 0; color: var(--muted); font-size: 16px; }
 .office .facts b.days { display: block; color: var(--ink); font-weight: 700; margin-bottom: 2px; }
 .hero-dock .dock-item { align-self: stretch; }
+.dock-note { grid-column: 1 / -1; margin: 0; padding: 10px 20px 6px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.5; color: var(--muted); }
+@media (min-width: 1025px) { .hero-b .hero-inner { padding-bottom: 310px; } }
+@media (max-width: 1024px) { .dock-note { margin-top: 8px; } }
