@@ -835,3 +835,4 @@ main { view-transition-name: main; }
 .sched ul { margin: 0 0 10px; padding-left: 1.2em; font-size: 18px; line-height: 1.6; color: var(--ink); }
 .sched p { margin: 0; color: var(--muted); font-size: 16px; }
 .office .facts b.days { display: block; color: var(--ink); font-weight: 700; margin-bottom: 2px; }
+.hero-dock .dock-item { align-self: stretch; }
