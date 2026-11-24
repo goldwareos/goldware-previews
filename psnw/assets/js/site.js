@@ -41,6 +41,38 @@
     });
   });
 
+  // Live form: posts to the same HighLevel form tracking the old site used (form "contact-form" in his
+  // sub-account), so it lands in his contacts/inbox and the office email notification keeps working.
+  [].forEach.call(document.querySelectorAll('form[data-live]'), function (f) {
+    var busy = false;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var s = f.querySelector('.form-status'), btn = f.querySelector('button[type="submit"]');
+      if (busy) return;
+      if (!f.checkValidity()) { var bad = f.querySelector(':invalid'); s.textContent = 'Please fill in ' + (bad && bad.labels && bad.labels[0] ? bad.labels[0].textContent.replace('*', '').trim().toLowerCase() : 'the required fields') + '.'; if (bad) bad.focus(); return; }
+      var v = function (n) { var el = f.elements[n]; return el ? String(el.value || '').trim() : ''; };
+      if (v('website')) { s.textContent = 'Thank you. The office will contact you soon.'; f.reset(); return; }  // honeypot
+      var office = f.elements.office ? f.elements.office.options[f.elements.office.selectedIndex].text : '';
+      var note = 'Appointment request from the website. Preferred office: ' + office + '.' + (v('message') ? ' ' + v('message') : '');
+      var sid = (document.cookie.match(/(?:^|;\s*)__vibe_sid=([0-9a-f-]{36})(?:;|$)/) || [])[1] ||
+        (window.crypto && crypto.randomUUID ? crypto.randomUUID() : 's-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12));
+      var ev = {
+        type: 'external_form_submission', timestamp: Date.now(), formId: 'contact-form',
+        formData: { first_name: v('firstName'), last_name: v('lastName'), email: v('email'), phone: v('phone'), calendar_notes: note, alFB8kTqXD0yNatOqUlw: 'Appointment request' },
+        formLabels: { first_name: 'First Name', last_name: 'Last Name', email: 'Email', phone: 'Phone', calendar_notes: 'Your message', alFB8kTqXD0yNatOqUlw: 'Subject' },
+        url: location.href, pageUrl: location.href, title: document.title, path: location.pathname, userAgent: navigator.userAgent,
+        trackingId: 'tk_d125ad41ee8a4591970eeb8e0722936e', locationId: 't2vMjWB3c8cz5rl9CGtm', projectId: '1792221341163899332', sessionId: sid,
+        properties: { deviceType: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop', source: 'ai_studio', projectId: '1792221341163899332', formName: 'Contact Form' }
+      };
+      var body = new FormData(); body.append('event', JSON.stringify(ev));
+      busy = true; if (btn) btn.disabled = true; s.textContent = 'Sending…';
+      fetch('https://backend.leadconnectorhq.com/external-tracking/events', { method: 'POST', headers: { version: '2021-07-28' }, body: body })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); s.textContent = 'Thank you. Your request was sent, and the office will contact you soon. Questions? Call 208-400-5131.'; f.reset(); })
+        .catch(function () { s.textContent = 'Sorry, the request did not go through. Please call 208-400-5131, Mon to Fri, 8 to 5.'; })
+        .then(function () { busy = false; if (btn) btn.disabled = false; });
+    });
+  });
+
   // Office preselect (?office=spokane) on the request form
   var sel = document.getElementById('of'), m = location.search.match(/[?&]office=([a-z]+)/);
   if (sel && m && sel.querySelector('option[value="' + m[1] + '"]')) sel.value = m[1];
