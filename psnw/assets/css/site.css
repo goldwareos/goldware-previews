@@ -793,3 +793,26 @@ body .widget_sc .menuChips:hover { background: var(--navy) !important; color: #f
 .map-trio .mt0 { grid-column: 1 / -1; }
 .map-trio .mt img { height: 130px !important; }
 .map-trio .mt0 img { height: 170px !important; }
+
+/* ==== ADDED 8: smooth page-to-page transitions (cross-document View Transitions, progressive enhancement) ==== */
+@view-transition { navigation: auto; }
+html { background-color: var(--navy-ink); }   /* never a white flash between navy banners */
+body { background-color: #fff; }
+.mock-strip { view-transition-name: mock-strip; }
+.site-header { view-transition-name: site-header; }
+.action-bar { view-transition-name: action-bar; }
+main { view-transition-name: main; }
+::view-transition-group(site-header), ::view-transition-group(mock-strip), ::view-transition-group(action-bar) { animation-duration: 0s; }
+::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; }
+::view-transition-old(main) { animation: vt-out .22s cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(main) { animation: vt-in .38s cubic-bezier(.22, 1, .36, 1) .06s both; }
+::view-transition-old(root) { animation: vt-dim .22s ease both; }
+::view-transition-new(root) { animation: vt-fade .3s ease both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(14px); } }
+@keyframes vt-dim { to { opacity: 0; } }
+@keyframes vt-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

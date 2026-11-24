@@ -122,6 +122,11 @@
     };
     document.body.appendChild(jq);
   }
-  ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, loadChat, { once: true, passive: true }); });
-  window.addEventListener('load', function () { setTimeout(loadChat, 3500); });
+  function armChat() {
+    ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, loadChat, { once: true, passive: true }); });
+    setTimeout(loadChat, 3500);
+  }
+  // A prerendered page (hover prefetch) must not start the chat until the visitor actually lands on it
+  if (document.prerendering) document.addEventListener('prerenderingchange', armChat, { once: true });
+  else if (document.readyState === 'complete') armChat(); else window.addEventListener('load', armChat);
 })();
