@@ -825,3 +825,5 @@ main { view-transition-name: main; }
 .legal-doc ul.dash { list-style: none; padding-left: 0; }
 .legal-doc ul.dash li { position: relative; padding-left: 22px; margin-bottom: 10px; }
 .legal-doc ul.dash li::before { content: "\2013"; position: absolute; left: 0; color: var(--sky-text); }
+
+.page-hero .reviewed a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
