@@ -816,3 +816,12 @@ main { view-transition-name: main; }
   @view-transition { navigation: none; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* Legal documents (Dr. Smith's notices) */
+.legal-doc + section, section + .legal-doc { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); }
+.legal-doc h3 { font-family: var(--sans); font-size: 18px; font-weight: 700; color: var(--navy); margin: 1.6em 0 .4em; }
+.legal-doc .caps { font-weight: 700; color: var(--ink); letter-spacing: .02em; }
+.legal-doc .doc-dl { margin: 0 0 22px; }
+.legal-doc ul.dash { list-style: none; padding-left: 0; }
+.legal-doc ul.dash li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+.legal-doc ul.dash li::before { content: "\2013"; position: absolute; left: 0; color: var(--sky-text); }
